@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Report Issue</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="nav">
+  <a href="dashboard.html">Dashboard</a>
+</div>
+
+<div class="container">
+  <h2>Report Issue</h2>
+
+  <input id="title" placeholder="Issue Title">
+  <textarea id="desc" placeholder="Description"></textarea>
+  <input type="file" id="image">
+
+  <div id="map"></div>
+
+  <button onclick="submitIssue()">Submit</button>
+</div>
+
+<script src="js/map.js"></script>
+<script src="js/report.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async></script>
+
+</body>
+</html>

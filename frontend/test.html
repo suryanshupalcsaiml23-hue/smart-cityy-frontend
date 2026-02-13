@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Recommendation Test</title>
+</head>
+<body>
+
+  <h2>Step 5: Recommendation System</h2>
+  <button onclick="register()">Register</button>
+  <button onclick="login()">Login</button>
+  <button onclick="savePreferences()">Save Preferences</button>
+  <button onclick="getRecommendations()">Get Recommendations</button>
+
+  <script>
+    let token = "";
+
+    function register() {
+      fetch("http://localhost:5000/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: "test@example.com",
+          password: "123456"
+        })
+      }).then(r => r.json()).then(console.log);
+    }
+
+    function login() {
+      fetch("http://localhost:5000/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: "test@example.com",
+          password: "123456"
+        })
+      })
+      .then(r => r.json())
+      .then(d => {
+        console.log("LOGIN:", d);
+        token = d.token;
+      });
+    }
+
+    function savePreferences() {
+      fetch("http://localhost:5000/preferences", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          genres: ["Sci-Fi", "Action"]
+        })
+      }).then(r => r.json()).then(console.log);
+    }
+
+    function getRecommendations() {
+      fetch("http://localhost:5000/recommend", {
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+      })
+      .then(r => r.json())
+      .then(console.log);
+    }
+  </script>
+
+</body>
+</html>
